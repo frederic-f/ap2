@@ -11,7 +11,7 @@ bool sous_seq_recu (liste L1, liste L2)
 
 bool sous_seq_iter (liste L1, liste L2)
 {
-    return (false) ;
+    return (true) ;
 }
 
 void test_sous_seq_param (int a, liste L)
