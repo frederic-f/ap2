@@ -28,7 +28,22 @@ bool sous_seq_recu (liste L1, liste L2)
 
 bool sous_seq_iter (liste L1, liste L2)
 {
-    return (true) ;
+    liste M, N ;
+
+    M = L1 ; // sous liste
+    N = L2 ;
+
+    while ( ! (est_vide (M) || est_vide (N))) // on ne retourne un résultat que si au moins une des deux listes est vide
+    {
+        if (prem (M) == prem (N))
+        {
+            M = reste (M) ;
+        }
+
+        N = reste (N) ;
+    }
+
+    return est_vide (M) ; // L1 est une sous-liste de L2 si L1 est vide a la fin des iterations
 }
 
 void test_sous_seq_param (liste L1, liste L2)
@@ -36,8 +51,8 @@ void test_sous_seq_param (liste L1, liste L2)
     printf("\n") ;
     // test de la version récursive
 
-    bool L1_sous_seq_L2 ;
-    L1_sous_seq_L2 = sous_seq_recu (L1, L2) ;
+    bool L1_sous_seq_L2_recu ;
+    L1_sous_seq_L2_recu = sous_seq_recu (L1, L2) ;
 
     printf ("bool sous_seq_recu (") ;
     print_liste (L1) ;
@@ -45,12 +60,21 @@ void test_sous_seq_param (liste L1, liste L2)
     print_liste (L2) ;
     printf (") = ") ;
 
-    if (L1_sous_seq_L2) { printf ("vrai") ; } else { printf ("faux") ; }
+    if (L1_sous_seq_L2_recu) { printf ("vrai") ; } else { printf ("faux") ; }
 
     printf("\n") ;
 
     // test de la version itérative
+    bool L1_sous_seq_L2_iter ;
+    L1_sous_seq_L2_iter = sous_seq_iter (L1, L2) ;
 
+    printf ("bool sous_seq_iter (") ;
+    print_liste (L1) ;
+    printf (", ") ;
+    print_liste (L2) ;
+    printf (") = ") ;
+
+    if (L1_sous_seq_L2_iter) { printf ("vrai") ; } else { printf ("faux") ; }
 
     printf("\n\n") ;
 }
@@ -91,6 +115,29 @@ int main (void)
 
 /*
 
- fonction.c
+$ ./14_sous_sequence_de
+
+bool sous_seq_recu ((), ()) = vrai
+bool sous_seq_iter ((), ()) = vrai
+
+
+bool sous_seq_recu ((), (3, 2, 2)) = vrai
+bool sous_seq_iter ((), (3, 2, 2)) = vrai
+
+
+bool sous_seq_recu ((3, 2), (3, 2, 2)) = vrai
+bool sous_seq_iter ((3, 2), (3, 2, 2)) = vrai
+
+
+bool sous_seq_recu ((3, 2, 2), (3, 2)) = faux
+bool sous_seq_iter ((3, 2, 2), (3, 2)) = faux
+
+
+bool sous_seq_recu ((3, 2, 2), (1, 180, 3, 2, 2)) = vrai
+bool sous_seq_iter ((3, 2, 2), (1, 180, 3, 2, 2)) = vrai
+
+
+bool sous_seq_recu ((4, 3, 2, 2), (1, 180, 3, 2, 2)) = faux
+bool sous_seq_iter ((4, 3, 2, 2), (1, 180, 3, 2, 2)) = faux
 
  */
