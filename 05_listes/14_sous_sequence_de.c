@@ -6,7 +6,7 @@
 
 bool sous_seq_recu (liste L1, liste L2)
 {
-    return (false) ;
+    return (true) ;
 }
 
 bool sous_seq_iter (liste L1, liste L2)
