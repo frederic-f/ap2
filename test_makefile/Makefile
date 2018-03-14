@@ -9,3 +9,6 @@ liste.o: liste.c liste.h
 01_longueur.o: 01_longueur.c
 	$(CC) -Wall -c 01_longueur.c
 
+clean:
+	rm -f 01_longueur *.o
+
